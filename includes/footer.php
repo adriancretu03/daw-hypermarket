@@ -2,5 +2,5 @@
 
 function render_footer(): string
 {
-    return '</body></html>';
+    return '</main></body></html>';
 }
