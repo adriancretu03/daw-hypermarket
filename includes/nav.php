@@ -4,7 +4,11 @@ require_once __DIR__ . '/../lib/render.php';
 
 function render_nav(?array $user): string
 {
-    $links = ['<a href="/index.php">Catalog</a>', '<a href="/contact.php">Contact</a>'];
+    $links = [
+        '<a href="/index.php">Catalog</a>',
+        '<a href="/about.php">About</a>',
+        '<a href="/contact.php">Contact</a>',
+    ];
 
     if ($user === null) {
         $links[] = '<a href="/login.php">Login</a>';
