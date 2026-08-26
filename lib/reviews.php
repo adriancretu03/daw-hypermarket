@@ -51,3 +51,14 @@ function save_review(PDO $pdo, int $productId, int $userId, int $rating, string 
         [$productId, $userId, $rating, $comment]
     );
 }
+
+function delete_review(PDO $pdo, int $reviewId, int $userId): bool
+{
+    $rowsAffected = db_execute(
+        $pdo,
+        'DELETE FROM reviews WHERE id = ? AND user_id = ?',
+        [$reviewId, $userId]
+    );
+
+    return $rowsAffected > 0;
+}
