@@ -2,7 +2,7 @@ services:
   web:
     build: .
     restart: unless-stopped
-    command: php -S 0.0.0.0:8000 -t public
+    command: php -S 0.0.0.0:8000 -t public router.php
     volumes:
       - .:/var/www/html
     ports:
