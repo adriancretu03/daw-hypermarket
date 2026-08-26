@@ -6,6 +6,7 @@ require_once __DIR__ . '/../../lib/csrf.php';
 require_once __DIR__ . '/../../lib/flash.php';
 require_once __DIR__ . '/../../lib/render.php';
 require_once __DIR__ . '/../../lib/employees.php';
+require_once __DIR__ . '/../../lib/analytics.php';
 require_once __DIR__ . '/../../includes/header.php';
 require_once __DIR__ . '/../../includes/nav.php';
 require_once __DIR__ . '/../../includes/footer.php';
@@ -19,6 +20,7 @@ try {
 }
 
 $pdo = get_pdo();
+track_visit($pdo, '/admin/employee_form.php');
 $id = isset($_GET['id']) && $_GET['id'] !== '' ? (int) $_GET['id'] : null;
 $employee = $id !== null ? find_employee($pdo, $id) : null;
 
