@@ -24,7 +24,7 @@ echo '<h1>Categories</h1>';
 
 $categoryLinks = '<a href="/index.php">All</a>';
 foreach ($categories as $category) {
-    $categoryLinks .= ' <a href="/index.php?category_id=' . (int) $category['id'] . '">'
+    $categoryLinks .= ' <a href="/category.php?id=' . (int) $category['id'] . '">'
         . e($category['name']) . '</a>';
 }
 echo '<nav>' . $categoryLinks . '</nav>';

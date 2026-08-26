@@ -7,6 +7,13 @@ function list_categories(PDO $pdo): array
     return db_query($pdo, 'SELECT id, name FROM categories ORDER BY name');
 }
 
+function find_category(PDO $pdo, int $id): ?array
+{
+    $rows = db_query($pdo, 'SELECT id, name FROM categories WHERE id = ?', [$id]);
+
+    return $rows[0] ?? null;
+}
+
 function validate_category(array $input): array
 {
     $errors = [];
