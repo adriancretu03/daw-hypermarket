@@ -87,3 +87,9 @@ function save_product(PDO $pdo, ?int $id, int $categoryId, string $name, float $
 
     return (int) $pdo->lastInsertId();
 }
+
+function delete_product(PDO $pdo, int $id): void
+{
+    db_execute($pdo, 'DELETE FROM reviews WHERE product_id = ?', [$id]);
+    db_execute($pdo, 'DELETE FROM products WHERE id = ?', [$id]);
+}
