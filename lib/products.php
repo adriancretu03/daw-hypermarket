@@ -28,3 +28,14 @@ function find_product(PDO $pdo, int $id): ?array
 
     return $rows[0] ?? null;
 }
+
+function list_products_with_category(PDO $pdo): array
+{
+    return db_query(
+        $pdo,
+        'SELECT p.id, p.name, p.price, p.stock_qty, c.name AS category_name
+         FROM products p
+         JOIN categories c ON c.id = p.category_id
+         ORDER BY p.name'
+    );
+}
