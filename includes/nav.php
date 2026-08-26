@@ -15,8 +15,9 @@ function render_nav(?array $user): string
 
     $links[] = '<span>Welcome, ' . e($user['name']) . '</span>';
 
-    if ($user['role'] === 'employee') {
+    if ($user['role'] === 'employee' || $user['role'] === 'admin') {
         $links[] = '<a href="/employee/products.php">Manage products</a>';
+        $links[] = '<a href="/employee/categories.php">Manage categories</a>';
     }
 
     if ($user['role'] === 'admin') {
