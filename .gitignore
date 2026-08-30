@@ -2,3 +2,5 @@
 .phpunit.result.cache
 .env
 /cache/
+/certs/*
+!/certs/.gitkeep
