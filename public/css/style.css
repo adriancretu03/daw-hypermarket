@@ -1,0 +1,207 @@
+:root {
+    --color-bg: #f7f7f5;
+    --color-surface: #ffffff;
+    --color-text: #1f2320;
+    --color-muted: #6b7268;
+    --color-border: #dcdfd9;
+    --color-accent: #2f6d4f;
+    --color-accent-hover: #245539;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    color: var(--color-text);
+    background: var(--color-bg);
+    line-height: 1.6;
+}
+
+main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1.5rem 3rem;
+}
+
+h1, h2, h3 {
+    line-height: 1.25;
+    margin: 1.75rem 0 0.75rem;
+}
+
+h1 {
+    font-size: 1.85rem;
+}
+
+h2 {
+    font-size: 1.3rem;
+}
+
+.site-nav {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    width: 100%;
+    margin-bottom: 2rem;
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.nav-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.85rem 1.5rem;
+}
+
+.nav-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.site-nav .brand {
+    margin-right: 0.5rem;
+}
+
+.site-nav a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.site-nav a:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+}
+
+.subnav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.subnav a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.subnav a:hover {
+    color: var(--color-accent-hover);
+    text-decoration: underline;
+}
+
+.nav-welcome {
+    color: var(--color-muted);
+    margin-left: auto;
+}
+
+a {
+    color: var(--color-accent);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    max-width: 28rem;
+    margin: 1rem 0;
+}
+
+form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+}
+
+input, textarea, select, button {
+    font: inherit;
+    padding: 0.5rem 0.65rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background: var(--color-surface);
+    color: var(--color-text);
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+}
+
+button {
+    cursor: pointer;
+    background: var(--color-accent);
+    color: #fff;
+    border-color: var(--color-accent);
+    align-self: flex-start;
+    transition: background 0.15s ease;
+}
+
+button:hover {
+    background: var(--color-accent-hover);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+th, td {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+th {
+    color: var(--color-muted);
+    font-weight: 600;
+    background: var(--color-bg);
+}
+
+tbody tr:hover {
+    background: var(--color-bg);
+}
+
+.item-row {
+    padding: 0.6rem 0.75rem;
+    margin: 0;
+    border-bottom: 1px solid var(--color-border);
+    transition: background 0.15s ease;
+    list-style: none;
+}
+
+.item-row:hover {
+    background: var(--color-surface);
+}
+
+.item-list {
+    border-top: 1px solid var(--color-border);
+    margin: 1rem 0;
+    padding: 0;
+}
+
+code {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 3px;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.9em;
+}

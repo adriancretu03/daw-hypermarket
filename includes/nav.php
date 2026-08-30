@@ -4,32 +4,38 @@ require_once __DIR__ . '/../lib/render.php';
 
 function render_nav(?array $user): string
 {
-    $links = [
+    $logo = '<a href="/index.php" class="brand"><img src="/images/logo.svg" alt="Hypermarket logo" width="140" height="34"></a>';
+
+    $primaryLinks = [
         '<a href="/index.php">Catalog</a>',
         '<a href="/about.php">About</a>',
         '<a href="/contact.php">Contact</a>',
     ];
 
     if ($user === null) {
-        $links[] = '<a href="/login.php">Login</a>';
-        $links[] = '<a href="/register.php">Register</a>';
+        $primaryLinks[] = '<a href="/login.php">Login</a>';
+        $primaryLinks[] = '<a href="/register.php">Register</a>';
 
-        return '<nav>' . implode(' ', $links) . '</nav>';
+        return '<nav class="site-nav"><div class="nav-inner"><div class="nav-row">'
+            . $logo . implode(' ', $primaryLinks) . '</div></div></nav><main>';
     }
 
-    $links[] = '<span>Welcome, ' . e($user['name']) . '</span>';
+    $actionLinks = [];
 
     if ($user['role'] === 'employee' || $user['role'] === 'admin') {
-        $links[] = '<a href="/employee/products.php">Manage products</a>';
-        $links[] = '<a href="/employee/categories.php">Manage categories</a>';
+        $actionLinks[] = '<a href="/employee/products.php">Manage products</a>';
+        $actionLinks[] = '<a href="/employee/categories.php">Manage categories</a>';
     }
 
     if ($user['role'] === 'admin') {
-        $links[] = '<a href="/admin/employees.php">Manage employees</a>';
-        $links[] = '<a href="/admin/reports.php">Reports</a>';
+        $actionLinks[] = '<a href="/admin/employees.php">Manage employees</a>';
+        $actionLinks[] = '<a href="/admin/reports.php">Reports</a>';
     }
 
-    $links[] = '<a href="/logout.php">Logout</a>';
-
-    return '<nav>' . implode(' ', $links) . '</nav>';
+    return '<nav class="site-nav"><div class="nav-inner">'
+        . '<div class="nav-row">' . $logo . implode(' ', $primaryLinks)
+        . '<span class="nav-welcome">Welcome, ' . e($user['name']) . '</span>'
+        . '<a href="/logout.php">Logout</a></div>'
+        . '<div class="nav-row nav-actions">' . implode(' ', $actionLinks) . '</div>'
+        . '</div></nav><main>';
 }

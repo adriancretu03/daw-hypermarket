@@ -15,8 +15,8 @@ function render_header(string $title, ?string $description = null): string
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{$safeDescription}">
     <title>{$safeTitle} — Hypermarket</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<main>
 HTML;
 }

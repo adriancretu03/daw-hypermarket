@@ -42,18 +42,20 @@ if ($rate === null) {
     echo '<p>Exchange rate currently unavailable.</p>';
 }
 
-foreach ($products as $product) {
-    $line = '<a href="/product.php?id=' . (int) $product['id'] . '">' . e($product['name']) . '</a>'
-        . ' — ' . e((string) $product['price']) . ' RON';
+if ($products !== []) {
+    echo '<div class="item-list">';
+    foreach ($products as $product) {
+        $line = '<a href="/product.php?id=' . (int) $product['id'] . '">' . e($product['name']) . '</a>'
+            . ' — ' . e((string) $product['price']) . ' RON';
 
-    if ($rate !== null) {
-        $line .= ' (~' . number_format(((float) $product['price']) * $rate, 2) . ' EUR)';
+        if ($rate !== null) {
+            $line .= ' (~' . number_format(((float) $product['price']) * $rate, 2) . ' EUR)';
+        }
+
+        echo '<p class="item-row">' . $line . '</p>';
     }
-
-    echo '<p>' . $line . '</p>';
-}
-
-if ($products === []) {
+    echo '</div>';
+} else {
     echo '<p>No records found.</p>';
 }
 

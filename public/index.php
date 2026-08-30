@@ -27,7 +27,7 @@ foreach ($categories as $category) {
     $categoryLinks .= ' <a href="/category.php?id=' . (int) $category['id'] . '">'
         . e($category['name']) . '</a>';
 }
-echo '<nav>' . $categoryLinks . '</nav>';
+echo '<nav class="subnav">' . $categoryLinks . '</nav>';
 
 echo '<form method="get" action="/index.php">'
     . '<input type="text" name="q" placeholder="Search products" value="' . e($term ?? '') . '">'
@@ -35,11 +35,14 @@ echo '<form method="get" action="/index.php">'
     . '</form>';
 
 echo '<h2>Products</h2>';
-foreach ($products as $product) {
-    echo '<p><a href="/product.php?id=' . (int) $product['id'] . '">' . e($product['name']) . '</a>'
-        . ' — ' . e((string) $product['price']) . '</p>';
-}
-if ($products === []) {
+if ($products !== []) {
+    echo '<div class="item-list">';
+    foreach ($products as $product) {
+        echo '<p class="item-row"><a href="/product.php?id=' . (int) $product['id'] . '">' . e($product['name']) . '</a>'
+            . ' — ' . e((string) $product['price']) . '</p>';
+    }
+    echo '</div>';
+} else {
     echo '<p>No records found.</p>';
 }
 
