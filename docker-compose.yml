@@ -1,3 +1,5 @@
+name: hypermarket-php
+
 services:
   web:
     build: .
