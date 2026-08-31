@@ -11,14 +11,10 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    env_file:
+      - .env
     environment:
       DB_HOST: db
-      DB_NAME: ${DB_NAME:-hypermarket}
-      DB_USER: ${DB_USER:-hypermarket}
-      DB_PASS: ${DB_PASS:-hypermarket}
-      RECAPTCHA_SITE_KEY: ${RECAPTCHA_SITE_KEY:-}
-      RECAPTCHA_SECRET_KEY: ${RECAPTCHA_SECRET_KEY:-}
-      CONTACT_ADMIN_EMAIL: ${CONTACT_ADMIN_EMAIL:-admin@example.com}
 
   db:
     image: mysql:8.0
