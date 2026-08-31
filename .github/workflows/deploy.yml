@@ -15,6 +15,7 @@ jobs:
           username: ${{ secrets.DEPLOY_USER }}
           port: ${{ secrets.DEPLOY_PORT }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          use_insecure_cipher: true
           script: |
             cd ~/domains/acretu.daw.ssmr.ro/repo
             git fetch origin main
