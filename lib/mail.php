@@ -1,8 +1,34 @@
 <?php
 
+require_once __DIR__ . '/phpmailer/class.phpmailer.php';
+
 function contact_mail_transport(string $to, string $subject, string $body, string $headers): bool
 {
-    return mail($to, $subject, $body, $headers);
+    $mail = new PHPMailer(true);
+
+    try {
+        $mail->IsSMTP();
+        $mail->SMTPAuth = true;
+        $mail->SMTPSecure = getenv('SMTP_SECURE') ?: 'ssl';
+        $mail->Host = getenv('SMTP_HOST') ?: '';
+        $mail->Port = (int) (getenv('SMTP_PORT') ?: 465);
+        $mail->Username = getenv('SMTP_USERNAME') ?: '';
+        $mail->Password = getenv('SMTP_PASSWORD') ?: '';
+
+        $mail->SetFrom(getenv('SMTP_FROM_EMAIL') ?: $mail->Username, getenv('SMTP_FROM_NAME') ?: 'Hypermarket');
+        $mail->AddAddress($to);
+
+        if (preg_match('/Reply-To:\s*(\S+)/i', $headers, $m) === 1) {
+            $mail->AddReplyTo($m[1]);
+        }
+        $mail->IsHTML(false);
+        $mail->Subject = $subject;
+        $mail->Body = $body;
+
+        return $mail->Send();
+    } catch (Exception $e) {
+        return false;
+    }
 }
 
 function validate_contact(array $input): array
