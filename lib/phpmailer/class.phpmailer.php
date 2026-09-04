@@ -1722,18 +1722,24 @@ class PHPMailer {
     // There should not be any EOL in the string
     $encoded = preg_replace('/[\r\n]*/', '', $str);
 
+    // The /e modifier these three used was removed in PHP 7.0, which made
+    // preg_replace() return null and silently blank out any header with a
+    // non-ASCII character in it. preg_replace_callback() is the replacement.
+    $qp = function ($matches) {
+      return '=' . sprintf('%02X', ord($matches[1]));
+    };
+
     switch (strtolower($position)) {
       case 'phrase':
-        $encoded = preg_replace("/([^A-Za-z0-9!*+\/ -])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        $encoded = preg_replace_callback('/([^A-Za-z0-9!*+\/ -])/', $qp, $encoded);
         break;
       case 'comment':
-        $encoded = preg_replace("/([\(\)\"])/e", "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        $encoded = preg_replace_callback('/([\(\)"])/', $qp, $encoded);
+        // no break: upstream 5.1 falls through to 'text' here, preserved as-is
       case 'text':
       default:
         // Replace every high ascii, control =, ? and _ characters
-        //TODO using /e (equivalent to eval()) is probably not a good idea
-        $encoded = preg_replace('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/e',
-              "'='.sprintf('%02X', ord('\\1'))", $encoded);
+        $encoded = preg_replace_callback('/([\000-\011\013\014\016-\037\075\077\137\177-\377])/', $qp, $encoded);
         break;
     }
 
